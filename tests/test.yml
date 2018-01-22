@@ -2,16 +2,22 @@
 
 - hosts: all
   vars:
-    satis_require_all: false
-    satis_require:
-      'symfony/polyfill-apcu': '*'
     satis_manage_cron: false
-    satis_archive_whitelist:
-      - test/test
-      - test/test1
-    satis_archive_blacklist:
-      - test/test
-      - test/test1
+    satis_json:
+      require:
+        'symfony/polyfill-apcu': '*'
+      require_all: false
+      archive:
+        whitelist:
+          - test/test
+          - test/test1
+        blacklist:
+          - test/test
+          - test/test1
+      config:
+        gitlab-domains:
+          - gitlab.com
+      notify-batch: /downloads/
 
   pre_tasks:
     - name: APT | Install tools

@@ -13,16 +13,21 @@ satis_manage_cron: true
 satis_version: "alpha"
 
 # Configuration
-satis_repo_name: "satis repository"
-satis_repo_homepage: "http://localhost/"
-satis_repos:
-- type: "composer"
-  url: "https://packagist.org"
-satis_require: {}
-satis_skip_dev: false
 satis_composer_ignore_secure_http: false
-satis_require_all: true
-satis_require_dependencies: true
-satis_require_dev_dependencies: false
-satis_archive_whitelist: []
-satis_archive_blacklist: []
+satis_json:
+  name: "satis repository"
+  homepage: "http://localhost/"
+  repositories:
+    - type: "composer"
+      url: "https://packagist.org"
+  require-all: true
+  require-dependencies: true
+  require-dev-dependencies: false
+  archive:
+    whitelist: []
+    blacklist: []
+    directory: dist
+    format: zip
+    skip-dev: false
+  providers: false
+  config: {}
