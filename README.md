@@ -45,6 +45,11 @@ Role Variables
 - `satis_config`: (optional) Can be used to set composer options [docs](https://getcomposer.org/doc/articles/handling-private-packages-with-satis.md#downloads)
 - `satis_notify_batch`: (optional) specify a callback URL [docs](https://getcomposer.org/doc/articles/handling-private-packages-with-satis.md#downloads)
 
+### Tags available
+Can be used like this `ansible-playbook example.yml --tags "build"` for more information see [Ansible docs](https://docs.ansible.com/ansible/latest/playbooks_tags.html)
+
+- `build`: Runs the satis build command even when no configuration has changed.
+
 Dependencies
 ------------
 
