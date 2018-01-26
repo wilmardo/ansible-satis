@@ -1,21 +1,14 @@
 {
-	"name": "{{ satis_repo_name }}",
-	"homepage": "{{ satis_repo_homepage }}",
-	"repositories": {{ satis_repos | to_nice_json }},
-	{%- if satis_require %}"require": {{ satis_require | to_nice_json }},{% endif %}
-	"require-all": {{ satis_require_all | to_json }},
-	"require-dependencies": {{ satis_require_dependencies | to_json }},
-	"require-dev-dependencies": {{ satis_require_dev_dependencies | to_json }},
-	"archive": {
-		"whitelist": [{% for item in satis_archive_whitelist %}
+  "name": "{{ satis_repo_name }}",
+  "homepage": "{{ satis_repo_homepage }}",
+  "repositories": {{ satis_repos | to_nice_json }},
+{% if satis_archive %}  "archive": {{ satis_archive | to_nice_json }},{% endif %}
+{% if satis_providers %}  "providers": {{ satis_providers | to_json }},{% endif %}
+{% if satis_config %}  "config": {{ satis_config | to_nice_json }},{% endif %}
+{% if satis_notify_batch %}  "notify-batch": {{ satis_notify_batch | to_json }},{% endif %}
+{% if satis_require %}  "require": {{ satis_require | to_nice_json }},{% endif %}
 
-			"{{ item }}"{% if not loop.last %},{% endif %}
-		{%- endfor %} ],
-		"blacklist": [{% for item in satis_archive_blacklist %}
-
-			"{{ item }}"{% if not loop.last %},{% endif %}
-		{%- endfor %} ],
-		"directory": "dist",
-		"format": "zip"
-	}
+  "require-all": {{ satis_require_all | to_json }},
+  "require-dependencies": {{ satis_require_dependencies | to_json }},
+  "require-dev-dependencies": {{ satis_require_dev_dependencies | to_json }}
 }
