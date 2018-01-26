@@ -5,6 +5,7 @@
     src: "satis.json.j2"
     dest: "{{ satis_config_file }}"
   register: satis_config_file_created
+  tags: build
 
 - name: FILE | Create build dir
   file:
@@ -18,14 +19,20 @@
   find:
     paths: "{{ satis_build_dir }}"
   register: find_satis_build_dir
+  tags: build
+
+- set_fact:
+    no_build_tag: yes
 
 - name: COMMAND | Build the repository
   command: "{{ satis_build_command }}"
   when: >
     satis_config_file_created.changed == true or
-    find_satis_build_dir.matched == 0
+    find_satis_build_dir.matched == 0 or
+    no_build_tag is undefined
   become: yes
   become_user: "{{ satis_user }}"
+  tags: build
 
 - name: FILE | Fix owner/group
   file:
